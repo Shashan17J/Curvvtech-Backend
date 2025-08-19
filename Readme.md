@@ -11,7 +11,7 @@ Each user is assigned a unique `userId` (`u1`, `u2`, …) and each device a uniq
 - Device registration linked to users
 - Auto-generated `userId`,`deviceId` and `logId`
 - ZOD Validation
-- Background Cron Job
+- Background Cron Job for updating status
 - Type Safety
 - Secured Routes with JWT
 - Unit Tests (using Jest)
