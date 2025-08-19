@@ -76,11 +76,11 @@ docker-compose up -d
 docker-compose down
 ```
 
-The API will be available at 👉 `http://localhost:3000`
+The API will be available at `http://localhost:3000`
 
 ### API Documentation
 
-- Import the included Postman collection (Curvvtech-Backend.postman_collection.json)
+- Import the included Postman collection (Curvtech.postman_collection.json)
   to test all endpoints with sample requests.
 
 ## Assumptions Made
