@@ -1,19 +1,35 @@
 import { Request, Response } from "express";
 import Device from "../models/device";
 import DeviceLog from "../models/deviceLogs";
-import { v4 as uuidv4 } from "uuid";
 import {
   createLogsBodySchema,
   createLogsParamsSchema,
   getLogsParamsSchema,
   getLogsQuerySchema,
+  getUsageParamsSchema,
   getUsageQuerySchema,
 } from "../validationSchema/deviceLogsSchema";
 
 export const createLog = async (req: Request, res: Response) => {
   try {
-    const { id } = createLogsParamsSchema.parse(req.params);
-    const { event, value } = createLogsBodySchema.parse(req.body);
+    const parsedParams = createLogsParamsSchema.safeParse(req.params);
+    if (!parsedParams.success) {
+      return res.status(403).json({
+        success: false,
+        message: parsedParams.error.issues.map((err) => err.message),
+      });
+    }
+
+    const parsedBody = createLogsBodySchema.safeParse(req.body);
+    if (!parsedBody.success) {
+      return res.status(403).json({
+        success: false,
+        message: parsedBody.error.issues.map((err) => err.message),
+      });
+    }
+
+    const { id } = parsedParams.data;
+    const { event, value } = parsedBody.data;
 
     const device = await Device.findOne({ deviceId: id });
     if (!device) {
@@ -48,8 +64,24 @@ export const createLog = async (req: Request, res: Response) => {
 
 export const getLogs = async (req: Request, res: Response) => {
   try {
-    const { id } = getLogsParamsSchema.parse(req.params);
-    const { limit } = getLogsQuerySchema.parse(req.query);
+    const parsedParams = getLogsParamsSchema.safeParse(req.params);
+    if (!parsedParams.success) {
+      return res.status(403).json({
+        success: false,
+        message: parsedParams.error.issues.map((err) => err.message),
+      });
+    }
+
+    const parsedQuery = getLogsQuerySchema.safeParse(req.query);
+    if (!parsedQuery.success) {
+      return res.status(403).json({
+        success: false,
+        message: parsedQuery.error.issues.map((err) => err.message),
+      });
+    }
+
+    const { id } = parsedParams.data;
+    const { limit } = parsedQuery.data;
 
     const device = await Device.findOne({ deviceId: id });
     if (!device) {
@@ -79,8 +111,24 @@ export const getLogs = async (req: Request, res: Response) => {
 
 export const getUsage = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
-    const { range } = getUsageQuerySchema.parse(req.query);
+    const parsedParams = getUsageParamsSchema.safeParse(req.params);
+    if (!parsedParams.success) {
+      return res.status(403).json({
+        success: false,
+        message: parsedParams.error.issues.map((err) => err.message),
+      });
+    }
+
+    const parsedQuery = getUsageQuerySchema.safeParse(req.query);
+    if (!parsedQuery.success) {
+      return res.status(403).json({
+        success: false,
+        message: parsedQuery.error.issues.map((err) => err.message),
+      });
+    }
+
+    const { id } = parsedParams.data;
+    const { range } = parsedQuery.data;
 
     const device = await Device.findOne({ deviceId: id });
     if (!device) {
@@ -89,7 +137,7 @@ export const getUsage = async (req: Request, res: Response) => {
         .json({ success: false, message: "Device not found" });
     }
 
-    // Calculate time range
+    // Calculating time range
     let fromTime = new Date();
     if (range === "24h") {
       fromTime.setHours(fromTime.getHours() - 24);

@@ -11,14 +11,16 @@ import {
 // signup
 export const signUp = async (req: Request, res: Response) => {
   try {
-    const { name, email, password, role } = userSignUpSchema.parse(req.body);
+    const parsed = userSignUpSchema.safeParse(req.body);
 
-    if (!name || !email || !password || !role) {
+    if (!parsed.success) {
       return res.status(403).json({
         success: false,
-        message: "All fields are required",
+        message: parsed.error.issues.map((err) => err.message),
       });
     }
+
+    const { name, email, password, role } = parsed.data;
 
     // check user already exist and not
     const existingUser = await User.findOne({ email });
@@ -45,7 +47,7 @@ export const signUp = async (req: Request, res: Response) => {
       user,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
       success: false,
       message: "User cannot be registered, Please try again",
@@ -56,15 +58,16 @@ export const signUp = async (req: Request, res: Response) => {
 //  Login
 export const login = async (req: Request, res: Response) => {
   try {
-    const { email, password } = userLoginSchema.parse(req.body);
+    const parsed = userLoginSchema.safeParse(req.body);
 
-    // validation data
-    if (!email || !password) {
+    if (!parsed.success) {
       return res.status(403).json({
         success: false,
-        message: "All fields are required, please try again",
+        message: parsed.error.issues.map((err) => err.message),
       });
     }
+
+    const { email, password } = parsed.data;
 
     // Find user with provided email (user exists or not)
     const user = await User.findOne({ email });
@@ -112,7 +115,7 @@ export const login = async (req: Request, res: Response) => {
       });
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
       success: false,
       message: "Login Failure, please try again",

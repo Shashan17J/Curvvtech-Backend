@@ -15,15 +15,16 @@ interface AuthRequest extends Request {
 
 export const registerDevice = async (req: AuthRequest, res: Response) => {
   try {
-    const { name, type, status } = registerDeviceSchema.parse(req.body);
+    const parsed = registerDeviceSchema.safeParse(req.body);
 
-    // await Device.collection.dropIndexes();
-    if (!name || !type) {
+    if (!parsed.success) {
       return res.status(403).json({
         success: false,
-        message: "All fields are required",
+        message: parsed.error.issues.map((err) => err.message),
       });
     }
+
+    const { name, type, status } = parsed.data;
 
     if (!req.user?.id) {
       return res.status(401).json({ success: false, message: "Unauthorized" });
@@ -59,13 +60,21 @@ export const registerDevice = async (req: AuthRequest, res: Response) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ success: false, message: "Something went wrong" });
+    res.status(500).json({ success: false, message: "Server Error" });
   }
 };
 
 export const listDevices = async (req: Request, res: Response) => {
   try {
-    const { type, status } = listDeviceSchema.parse(req.body);
+    const parsed = listDeviceSchema.safeParse(req.body);
+
+    if (!parsed.success) {
+      return res.status(403).json({
+        success: false,
+        message: parsed.error.issues.map((err) => err.message),
+      });
+    }
+    const { type, status } = parsed.data;
 
     const filters: any = {};
     if (type) filters.type = type;
@@ -78,7 +87,7 @@ export const listDevices = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      count: devices.length,
+      // count: devices.length,
       devices: devices.map((d) => ({
         id: d.id,
         name: d.name,
@@ -96,7 +105,16 @@ export const listDevices = async (req: Request, res: Response) => {
 
 export const updateDevice = async (req: Request, res: Response) => {
   try {
-    const { id } = updateDeviceSchema.parse(req.params);
+    const parsed = updateDeviceSchema.safeParse(req.params);
+
+    if (!parsed.success) {
+      return res.status(403).json({
+        success: false,
+        message: parsed.error.issues.map((err) => err.message),
+      });
+    }
+
+    const { id } = parsed.data;
     const updates = req.body;
 
     if (updates.status) {
@@ -134,7 +152,16 @@ export const updateDevice = async (req: Request, res: Response) => {
 
 export const deleteDevice = async (req: Request, res: Response) => {
   try {
-    const { id } = deleteDeviceSchema.parse(req.params);
+    const parsed = deleteDeviceSchema.safeParse(req.params);
+
+    if (!parsed.success) {
+      return res.status(403).json({
+        success: false,
+        message: parsed.error.issues.map((err) => err.message),
+      });
+    }
+
+    const { id } = parsed.data;
 
     const deletedDevice = await Device.findOneAndDelete({ deviceId: id });
 
@@ -155,7 +182,16 @@ export const deleteDevice = async (req: Request, res: Response) => {
 
 export const heartbeatDevice = async (req: Request, res: Response) => {
   try {
-    const { id } = heartbeatDeviceSchema.parse(req.params);
+    const parsed = heartbeatDeviceSchema.safeParse(req.params);
+
+    if (!parsed.success) {
+      return res.status(403).json({
+        success: false,
+        message: parsed.error.issues.map((err) => err.message),
+      });
+    }
+
+    const { id } = parsed.data;
 
     const updatedDevice = await Device.findOneAndUpdate(
       { deviceId: id },

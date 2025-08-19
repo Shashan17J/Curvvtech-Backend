@@ -24,6 +24,6 @@ export interface IDevice extends Document {
   type: "light" | "fan" | "ac" | "tv" | "other";
   status: "active" | "inactive";
   last_active_at: Date | null;
-  owner_id: mongoose.Types.ObjectId;
+  owner_id: string;
   deviceNumber?: number;
 }

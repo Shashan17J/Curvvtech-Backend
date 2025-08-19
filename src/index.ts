@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 
 import config from "./configs/config";
 import connect from "./configs/database";
+import "./cronJob/backgroundJob";
 
 import userRoute from "./routes/userRoutes";
 import deviceRoute from "./routes/deviceRoutes";

@@ -22,6 +22,10 @@ export const getLogsQuerySchema = z.object({
     }),
 });
 
+export const getUsageParamsSchema = z.object({
+  id: z.string().min(1, { message: "id is required" }),
+});
+
 export const getUsageQuerySchema = z.object({
   range: z.enum(["24h", "7d", "30d"]).default("24h"),
 });
