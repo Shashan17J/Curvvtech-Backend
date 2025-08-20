@@ -26,3 +26,7 @@ export const deleteDeviceSchema = z.object({
 export const heartbeatDeviceSchema = z.object({
   id: z.string().min(2, { message: "id is required" }),
 });
+
+export const heartbeatDeviceBodySchema = z.object({
+  status: z.string().min(6, { message: "status is required" }),
+});

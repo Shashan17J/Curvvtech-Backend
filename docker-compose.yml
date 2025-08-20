@@ -9,8 +9,11 @@ services:
     environment:
       - JWT_SECRET=Curvvtech
       - MONGO_URI=mongodb://mongo:27017/curvvtech
+      - REDIS_DB_HOST=localhost
+      - REDIS_DB_PORT=6379
     depends_on:
       - mongo
+      - redis
 
   mongo:
     image: mongo:6.0
@@ -21,5 +24,16 @@ services:
     volumes:
       - mongo_data:/data/db
 
+  redis:
+    image: redis/redis-stack:latest
+    container_name: redis-stack
+    restart: always
+    ports:
+      - "6379:6379"
+      - "8001:8001"
+    volumes:
+      - redis_data:/data
+
 volumes:
   mongo_data:
+  redis_data:

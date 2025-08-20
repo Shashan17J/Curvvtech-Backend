@@ -5,7 +5,10 @@ export interface IUser extends Document {
   name: string;
   email?: string;
   password: string;
+  refreshToken: string;
+  blacklistedTokens: [String];
   role: "user" | "admin";
+  orgId: string;
   userNumber?: number;
 }
 

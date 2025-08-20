@@ -1,13 +1,16 @@
 import { Request, Response } from "express";
 import Device from "../models/device";
 import User from "../models/user";
+import { broadcastToOrg } from "../services/sseService";
 import {
   registerDeviceSchema,
   listDeviceSchema,
   updateDeviceSchema,
   deleteDeviceSchema,
   heartbeatDeviceSchema,
+  heartbeatDeviceBodySchema,
 } from "../validationSchema/deviceSchema";
+import connectRedis from "../configs/redis";
 
 interface AuthRequest extends Request {
   user?: any;
@@ -66,6 +69,7 @@ export const registerDevice = async (req: AuthRequest, res: Response) => {
 
 export const listDevices = async (req: Request, res: Response) => {
   try {
+    const redis = await connectRedis();
     const parsed = listDeviceSchema.safeParse(req.body);
 
     if (!parsed.success) {
@@ -76,6 +80,17 @@ export const listDevices = async (req: Request, res: Response) => {
     }
     const { type, status } = parsed.data;
 
+    const redisKey = `devices:${type || "all"}:${status || "all"}`;
+
+    const cachedDevices = await redis.lRange(redisKey, 0, -1);
+    if (cachedDevices.length > 0) {
+      return res.status(200).json({
+        success: true,
+        devices: cachedDevices.map((d) => JSON.parse(d)),
+        fromCache: true,
+      });
+    }
+
     const filters: any = {};
     if (type) filters.type = type;
     if (status) filters.status = status;
@@ -85,17 +100,29 @@ export const listDevices = async (req: Request, res: Response) => {
       "name email userId"
     );
 
+    const formatted = devices.map((d) => ({
+      id: d.id,
+      name: d.name,
+      type: d.type,
+      status: d.status,
+      last_active_at: d.last_active_at,
+      owner_id: d.owner_id,
+    }));
+
+    if (formatted.length > 0) {
+      await redis.del(redisKey); // clear old cached device
+      await redis.rPush(
+        redisKey,
+        formatted.map((d) => JSON.stringify(d))
+      );
+      await redis.expire(redisKey, 1200); // 20 min exp
+    }
+
     res.status(200).json({
       success: true,
       // count: devices.length,
-      devices: devices.map((d) => ({
-        id: d.id,
-        name: d.name,
-        type: d.type,
-        status: d.status,
-        last_active_at: d.last_active_at,
-        owner_id: d.owner_id,
-      })),
+      devices: formatted,
+      fromCache: false,
     });
   } catch (error) {
     console.error("Error fetching devices:", error);
@@ -103,8 +130,9 @@ export const listDevices = async (req: Request, res: Response) => {
   }
 };
 
-export const updateDevice = async (req: Request, res: Response) => {
+export const updateDevice = async (req: AuthRequest, res: Response) => {
   try {
+    const redis = await connectRedis();
     const parsed = updateDeviceSchema.safeParse(req.params);
 
     if (!parsed.success) {
@@ -131,6 +159,24 @@ export const updateDevice = async (req: Request, res: Response) => {
       return res
         .status(404)
         .json({ success: false, message: "Device not found" });
+    }
+
+    const keys = await redis.keys("devices:*");
+    if (keys.length > 0) {
+      await redis.del(keys);
+    }
+
+    // Broadcasting to org
+    if (req.user?.orgId) {
+      broadcastToOrg(req.user.orgId, {
+        message: "Device Updated",
+        id: updatedDevice.id,
+        name: updatedDevice.name,
+        type: updatedDevice.type,
+        status: updatedDevice.status,
+        last_active_at: updatedDevice.last_active_at,
+        owner_id: updatedDevice.owner_id,
+      });
     }
 
     res.status(200).json({
@@ -180,7 +226,7 @@ export const deleteDevice = async (req: Request, res: Response) => {
   }
 };
 
-export const heartbeatDevice = async (req: Request, res: Response) => {
+export const heartbeatDevice = async (req: AuthRequest, res: Response) => {
   try {
     const parsed = heartbeatDeviceSchema.safeParse(req.params);
 
@@ -191,11 +237,21 @@ export const heartbeatDevice = async (req: Request, res: Response) => {
       });
     }
 
+    const parsedBody = heartbeatDeviceBodySchema.safeParse(req.body);
+
+    if (!parsedBody.success) {
+      return res.status(403).json({
+        success: false,
+        message: parsedBody.error.issues.map((err) => err.message),
+      });
+    }
+
     const { id } = parsed.data;
+    const { status } = parsedBody.data;
 
     const updatedDevice = await Device.findOneAndUpdate(
       { deviceId: id },
-      { last_active_at: new Date() },
+      { last_active_at: new Date(), status: status },
       { new: true }
     );
 
@@ -203,6 +259,15 @@ export const heartbeatDevice = async (req: Request, res: Response) => {
       return res.status(404).json({
         success: false,
         message: "Device not found",
+      });
+    }
+
+    // Broadcasting to org
+    if (req.user?.orgId) {
+      broadcastToOrg(req.user.orgId, {
+        deviceId: updatedDevice.deviceId,
+        status: updatedDevice.status,
+        last_active_at: updatedDevice.last_active_at,
       });
     }
 

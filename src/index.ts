@@ -1,34 +1,34 @@
 import express from "express";
 import cors from "cors";
-import rateLimit from "express-rate-limit";
 import cookieParser from "cookie-parser";
 
 import config from "./configs/config";
 import connect from "./configs/database";
 import "./cronJob/backgroundJob";
 import connectRedis from "./configs/redis";
+import { responseTimeLogger } from "./middleware/responseTimeLogger";
+import { ipLogger } from "./middleware/ipLogMiddleware";
 
 import userRoute from "./routes/userRoutes";
 import deviceRoute from "./routes/deviceRoutes";
 import deviceLogsRoute from "./routes/deviceLogsRoutes";
+import eventsRoute from "./routes/eventRoutes";
+import healthCheckRoute from "./routes/healthCheckRoute";
+import logsExportRoute from "./routes/logsExportsRoutes";
+import usageReportRoute from "./routes/usageReportsRoute";
+
+import { enableQueryLogging } from "./middleware/monitorQueryMiddleware";
 
 const app = express();
 const PORT = config.port;
-
-// Rate Limiting
-const limiter = rateLimit({
-  windowMs: 6000,
-  max: 100,
-  message: "Too many request from this IP, please try again after minute",
-  headers: true,
-  validate: true,
-});
 
 // database connect
 connect();
 
 // redis connect
 connectRedis();
+
+enableQueryLogging();
 
 app.use(express.json());
 app.use(cookieParser());
@@ -38,11 +38,19 @@ app.use(
     credentials: true,
   })
 );
-app.use(limiter);
+
+// Ip Logging
+app.use(ipLogger);
+
+app.use(responseTimeLogger);
 
 app.use("/api/v1/auth", userRoute);
 app.use("/api/v1", deviceRoute);
 app.use("/api/v1", deviceLogsRoute);
+app.use("/api/v1", eventsRoute);
+app.use("/api/v1", healthCheckRoute);
+app.use("/api/v1", logsExportRoute);
+app.use("/api/v1", usageReportRoute);
 
 // def route
 app.get("/", (req, res) => {

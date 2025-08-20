@@ -22,10 +22,31 @@ export const getLogsQuerySchema = z.object({
     }),
 });
 
+export const getCsvJsonLogsQuerySchema = z.object({
+  limit: z
+    .string()
+    .transform((val) => parseInt(val, 10))
+    .refine((val) => !isNaN(val) && val > 0, {
+      message: "Limit must be a positive number",
+    }),
+  startDate: z
+    .string()
+    .optional()
+    .refine((val) => !val || !isNaN(Date.parse(val)), {
+      message: "startDate must be a valid date string",
+    }),
+  endDate: z
+    .string()
+    .optional()
+    .refine((val) => !val || !isNaN(Date.parse(val)), {
+      message: "endDate must be a valid date string",
+    }),
+});
+
 export const getUsageParamsSchema = z.object({
   id: z.string().min(1, { message: "id is required" }),
 });
 
 export const getUsageQuerySchema = z.object({
-  range: z.enum(["24h", "7d", "30d"]).default("24h"),
+  range: z.enum(["24h", "48h", "72h"]).default("24h"),
 });

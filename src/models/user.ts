@@ -23,10 +23,21 @@ const userSchema = new mongoose.Schema<IUser>(
       type: String,
       required: true,
     },
+    refreshToken: {
+      type: String,
+    },
+    blacklistedTokens: {
+      type: [String],
+      default: [],
+    },
     role: {
       type: String,
       enum: ["user", "admin"],
       default: "user",
+      required: true,
+    },
+    orgId: {
+      type: String,
       required: true,
     },
   },

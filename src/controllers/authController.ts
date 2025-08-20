@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import User from "../models/user";
-import config from "../configs/config";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import { generateAccessToken, generateRefreshToken } from "../utils/jwt";
 import {
   userSignUpSchema,
   userLoginSchema,
@@ -41,16 +40,16 @@ export const signUp = async (req: Request, res: Response) => {
       email,
       password: hashedPassword,
       role,
+      orgId: "Curvvtech",
     });
 
-    await redis.set(`user:${user._id}`, JSON.stringify(user), {
-      EX: 1200,
+    await redis.set(`user:${user.userId}`, JSON.stringify(user), {
+      EX: 1200, //20min
     });
 
     return res.status(200).json({
       success: true,
       message: "User registered successfully",
-      user,
     });
   } catch (error) {
     // console.log(error);
@@ -87,33 +86,38 @@ export const login = async (req: Request, res: Response) => {
 
     // compare password
     if (await bcrypt.compare(password, user.password!)) {
-      // Generate JWT token
-      const token = jwt.sign(
-        { email: user.email, id: user.userId, accountType: user.role },
-        config.jwtSecret,
-        {
-          expiresIn: "24h",
-        }
-      );
-
-      const options = {
-        expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), //3days
-        httpOnly: true,
+      const payload = {
+        email: user.email,
+        id: user.userId,
+        accountType: user.role,
+        orgId: user.orgId,
       };
+      const accessToken = generateAccessToken(payload);
+      const refreshToken = generateRefreshToken(payload);
+      user.refreshToken = refreshToken;
+      await user.save();
 
-      res
-        .cookie("token", token, options)
-        .status(200)
-        .json({
-          success: true,
-          token,
-          user: {
-            id: user.userId,
-            name: user.name,
-            email: user.email,
-            role: user.role,
-          },
-        });
+      res.cookie("accessToken", accessToken, {
+        httpOnly: true,
+        sameSite: "strict",
+        maxAge: 7 * 24 * 60 * 60 * 1000, //7 days
+      });
+      res.cookie("refreshToken", refreshToken, {
+        httpOnly: true,
+        sameSite: "strict",
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      });
+
+      res.status(200).json({
+        success: true,
+        accessToken,
+        user: {
+          id: user.userId,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+        },
+      });
     } else {
       return res.status(401).json({
         success: false,
