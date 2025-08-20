@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import config from "./configs/config";
 import connect from "./configs/database";
 import "./cronJob/backgroundJob";
+import connectRedis from "./configs/redis";
 
 import userRoute from "./routes/userRoutes";
 import deviceRoute from "./routes/deviceRoutes";
@@ -25,6 +26,9 @@ const limiter = rateLimit({
 
 // database connect
 connect();
+
+// redis connect
+connectRedis();
 
 app.use(express.json());
 app.use(cookieParser());

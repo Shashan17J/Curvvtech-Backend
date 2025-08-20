@@ -76,6 +76,13 @@ docker-compose up -d
 docker-compose down
 ```
 
+### Spin Redis Container
+
+```bash
+docker run -d --name redis-stack -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
+
+```
+
 The API will be available at `http://localhost:3000`
 
 ### API Documentation

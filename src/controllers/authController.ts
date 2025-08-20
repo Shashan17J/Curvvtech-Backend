@@ -7,10 +7,12 @@ import {
   userSignUpSchema,
   userLoginSchema,
 } from "../validationSchema/authSchema";
+import connectRedis from "../configs/redis";
 
 // signup
 export const signUp = async (req: Request, res: Response) => {
   try {
+    const redis = await connectRedis();
     const parsed = userSignUpSchema.safeParse(req.body);
 
     if (!parsed.success) {
@@ -39,6 +41,10 @@ export const signUp = async (req: Request, res: Response) => {
       email,
       password: hashedPassword,
       role,
+    });
+
+    await redis.set(`user:${user._id}`, JSON.stringify(user), {
+      EX: 1200,
     });
 
     return res.status(200).json({
