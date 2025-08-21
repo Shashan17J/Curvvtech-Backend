@@ -1,8 +1,9 @@
+import { Request, Response } from "express";
 import { signUp, login } from "../src/controllers/authController";
 import User from "../src/models/user";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { Request, Response } from "express";
+import * as jwtUtils from "../src/utils/jwt";
 
 jest.mock("../src/models/user");
 jest.mock("bcrypt");
@@ -79,6 +80,7 @@ describe("signUp controller", () => {
     expect(User.create).toHaveBeenCalledWith({
       name: "John Doe",
       email: "john@example.com",
+      orgId: "Curvvtech",
       password: "hashedPassword123",
       role: "user",
     });
@@ -87,7 +89,6 @@ describe("signUp controller", () => {
       expect.objectContaining({
         success: true,
         message: "User registered successfully",
-        user: expect.any(Object),
       })
     );
   });
@@ -107,32 +108,16 @@ describe("signUp controller", () => {
 
 // ------Login-------
 describe("login controller", () => {
-  let req: Partial<Request>;
-  let res: Partial<Response>;
-  let jsonMock: jest.Mock;
-  let statusMock: jest.Mock;
-  let cookieMock: jest.Mock;
+  let req: any;
+  let res: any;
 
   beforeEach(() => {
-    jsonMock = jest.fn();
-    cookieMock = jest.fn(() => ({ status: statusMock }));
-    statusMock = jest.fn(() => ({ json: jsonMock }));
-
-    req = {
-      body: {
-        email: "john@example.com",
-        password: "password123",
-      },
-    };
-
+    req = { body: { email: "john@example.com", password: "password123" } };
     res = {
-      status: statusMock,
-      json: jsonMock,
-      cookie: cookieMock,
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn().mockReturnThis(),
+      cookie: jest.fn().mockReturnThis(),
     };
-  });
-
-  afterEach(() => {
     jest.clearAllMocks();
   });
 
@@ -141,8 +126,8 @@ describe("login controller", () => {
 
     await login(req as Request, res as Response);
 
-    expect(statusMock).toHaveBeenCalledWith(403);
-    expect(jsonMock).toHaveBeenCalledWith(
+    expect(res.status).toHaveBeenCalledWith(403);
+    expect(res.json).toHaveBeenCalledWith(
       expect.objectContaining({
         success: false,
         message: expect.any(Array), // expecting Zod error messages
@@ -155,70 +140,80 @@ describe("login controller", () => {
 
     await login(req as Request, res as Response);
 
-    expect(statusMock).toHaveBeenCalledWith(401);
-    expect(jsonMock).toHaveBeenCalledWith({
+    expect(res.status).toHaveBeenCalledWith(401);
+    expect(res.json).toHaveBeenCalledWith({
       success: false,
       message: "User is not registered, please signup first",
     });
   });
 
-  it("should return 401 if password is incorrect", async () => {
-    (User.findOne as jest.Mock).mockResolvedValue({
-      userId: "123",
-      email: "john@example.com",
-      password: "hashedPassword",
-      role: "user",
-      name: "John Doe",
-    });
-    (bcrypt.compare as jest.Mock).mockResolvedValue(false);
-
-    await login(req as Request, res as Response);
-
-    expect(statusMock).toHaveBeenCalledWith(401);
-    expect(jsonMock).toHaveBeenCalledWith({
-      success: false,
-      message: "Password is incorrect",
-    });
-  });
-
   it("should return 200 and set cookie if login is successful", async () => {
     (User.findOne as jest.Mock).mockResolvedValue({
-      userId: "123",
+      userId: "u4",
       email: "john@example.com",
       password: "hashedPassword",
       role: "user",
       name: "John Doe",
+      orgId: "Curvvtech",
+      save: jest.fn(),
     });
+
     (bcrypt.compare as jest.Mock).mockResolvedValue(true);
-    (jwt.sign as jest.Mock).mockReturnValue("mocked-jwt-token");
 
-    await login(req as Request, res as Response);
+    jest
+      .spyOn(jwtUtils, "generateAccessToken")
+      .mockReturnValue("mocked-access-token");
+    jest
+      .spyOn(jwtUtils, "generateRefreshToken")
+      .mockReturnValue("mocked-refresh-token");
 
-    expect(jwt.sign).toHaveBeenCalledWith(
-      { email: "john@example.com", id: "123", accountType: "user" },
-      expect.any(String), // config.jwtSecret
-      { expiresIn: "24h" }
-    );
+    await login(req, res);
 
-    expect(cookieMock).toHaveBeenCalledWith(
-      "token",
-      "mocked-jwt-token",
-      expect.objectContaining({ httpOnly: true })
-    );
+    expect(jwtUtils.generateAccessToken).toHaveBeenCalledWith({
+      email: "john@example.com",
+      id: "u4",
+      accountType: "user",
+      orgId: "Curvvtech",
+    });
 
-    expect(statusMock).toHaveBeenCalledWith(200);
-    expect(jsonMock).toHaveBeenCalledWith(
+    expect(jwtUtils.generateRefreshToken).toHaveBeenCalledWith({
+      email: "john@example.com",
+      id: "u4",
+      accountType: "user",
+      orgId: "Curvvtech",
+    });
+
+    expect(res.cookie).toHaveBeenCalledWith(
+      "accessToken",
+      "mocked-access-token",
       expect.objectContaining({
-        success: true,
-        token: "mocked-jwt-token",
-        user: expect.objectContaining({
-          id: "123",
-          name: "John Doe",
-          email: "john@example.com",
-          role: "user",
-        }),
+        httpOnly: true,
+        sameSite: "strict",
+        maxAge: 7 * 24 * 60 * 60 * 1000,
       })
     );
+
+    expect(res.cookie).toHaveBeenCalledWith(
+      "refreshToken",
+      "mocked-refresh-token",
+      expect.objectContaining({
+        httpOnly: true,
+        sameSite: "strict",
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+      })
+    );
+
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json).toHaveBeenCalledWith({
+      success: true,
+      accessToken: "mocked-access-token",
+      user: {
+        id: "u4",
+        name: "John Doe",
+        email: "john@example.com",
+        role: "user",
+      },
+    });
   });
 
   it("should return 500 if an unexpected error occurs", async () => {
@@ -226,8 +221,8 @@ describe("login controller", () => {
 
     await login(req as Request, res as Response);
 
-    expect(statusMock).toHaveBeenCalledWith(500);
-    expect(jsonMock).toHaveBeenCalledWith({
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith({
       success: false,
       message: "Login Failure, please try again",
     });

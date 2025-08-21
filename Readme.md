@@ -1,21 +1,37 @@
 # Smart Device Management Platform
 
-A Typescript + Node.js + Express + MongoDB application to manage **Users**, **Device** and their **DevicesLogs**.  
-Each user is assigned a unique `userId` (`u1`, `u2`, …) and each device a unique `deviceId` (`d1`, `d2`, …) using auto-incrementing IDs.
+**Tech Stack**
 
-## 🚀 Features
+- Node.js + Express
+- TypeScript
+- MongoDB
+- Redis (caching)
+- Zod (validation)
+- JWT (authentication)
+- Server-Sent Events (SSE) for real-time updates
+- Docker & Docker Compose
 
-- User registration and login with JWT authentication
-- Secure password hashing
-- Middlewares
-- Device registration linked to users
-- Auto-generated `userId`,`deviceId` and `logId`
-- ZOD Validation
-- Background Cron Job for updating status
-- Type Safety
-- Secured Routes with JWT
-- Unit Tests (using Jest)
-- RESTful API with JSON responses
+**Architecture Overview**
+
+The Smart Device Management Platform backend is built with Node.js and Express, using MongoDB for data storage. Users, devices, and logs have incremental IDs (userId, deviceId, logId), with devices linked to their owners and logs linked to devices. The backend follows a clean architecture with separate controllers, services, and models, while Zod is used for strict input validation on all endpoints. JWT-based authentication secures API access, with short-lived access tokens, long-lived refresh tokens, and a blacklist mechanism for revoked tokens.
+
+Device management supports real-time updates via Server-Sent Events (SSE), broadcasting heartbeat and status changes to connected clients. Redis caching improves performance for device listings and analytics queries, with cache invalidation on updates. Background jobs automatically deactivate inactive devices, and endpoints have custom rate limits to prevent abuse. Asynchronous export and log aggregation enable efficient handling of large datasets. Overall, this architecture provides a secure, high-performance, and maintainable backend for managing smart devices and delivering real-time updates.
+
+## Features
+
+[feature documentation](./docs/features.md)
+
+## Flow and Chart
+
+[feature documentation](./docs/flow.md)
+
+## Performance
+
+[feature documentation](./docs/performance.md)
+
+## Metrics
+
+[feature documentation](./docs/metrics.md)
 
 ## Setup Instructions
 
@@ -74,13 +90,6 @@ docker-compose up -d
 
 ```bash
 docker-compose down
-```
-
-### Spin Redis Container
-
-```bash
-docker run -d --name redis-stack -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
-
 ```
 
 The API will be available at `http://localhost:3000`

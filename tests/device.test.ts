@@ -33,6 +33,7 @@ describe("Device Controller", () => {
   describe("registerDevice", () => {
     it("should return 403 if validation fails", async () => {
       const req = mockReq({ body: {} });
+
       const res = mockRes();
 
       await registerDevice(req as any, res);
@@ -248,7 +249,7 @@ describe("Device Controller", () => {
     it("should return 404 if device not found", async () => {
       (Device.findOneAndUpdate as jest.Mock).mockResolvedValue(null);
 
-      const req = mockReq({ params: { id: "d1" } });
+      const req = mockReq({ params: { id: "d1" }, body: { status: "active" } });
       const res = mockRes();
 
       await heartbeatDevice(req as any, res);
@@ -263,7 +264,7 @@ describe("Device Controller", () => {
         last_active_at: now,
       });
 
-      const req = mockReq({ params: { id: "d1" } });
+      const req = mockReq({ params: { id: "d1" }, body: { status: "active" } });
       const res = mockRes();
 
       await heartbeatDevice(req as any, res);

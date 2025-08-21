@@ -82,7 +82,7 @@ describe("Device Logs Controller", () => {
     it("should return 404 if device not found", async () => {
       (Device.findOne as jest.Mock).mockResolvedValue(null);
 
-      const req = mockReq({ params: { id: "d1" }, query: { limit: "10" } });
+      const req = mockReq({ params: { id: "d69" }, query: { limit: "10" } });
       const res = mockRes();
 
       await getLogs(req, res);
@@ -113,7 +113,7 @@ describe("Device Logs Controller", () => {
         ]),
       });
 
-      const req = mockReq({ params: { id: "d1" }, query: { limit: "5" } }); // limit as string
+      const req = mockReq({ params: { id: "d1" }, query: { limit: "5" } });
       const res = mockRes();
 
       await getLogs(req, res);
@@ -133,7 +133,7 @@ describe("Device Logs Controller", () => {
     it("should return 404 if device not found", async () => {
       (Device.findOne as jest.Mock).mockResolvedValue(null);
 
-      const req = mockReq({ params: { id: "d1" }, query: { range: "24h" } });
+      const req = mockReq({ params: { id: "d100" }, query: { range: "24h" } });
       const res = mockRes();
 
       await getUsage(req, res);
