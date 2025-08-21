@@ -34,9 +34,6 @@ const deviceSchema = new mongoose.Schema<IDevice>(
   { timestamps: true }
 );
 
-// indexing
-deviceSchema.index({ deviceId: 1 }, { unique: true });
-
 deviceSchema.plugin(AutoIncrement as any, {
   inc_field: "deviceNumber",
   start_seq: 1,

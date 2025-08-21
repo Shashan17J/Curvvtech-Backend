@@ -3,8 +3,6 @@ import config from "./config";
 
 const connect = async (): Promise<string> => {
   const options = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
     maxPoolSize: 10, // Maximum number of connections in the pool
     minPoolSize: 1, // Minimum number of idle connections
     serverSelectionTimeoutMS: 5000, // Timeout for server selection

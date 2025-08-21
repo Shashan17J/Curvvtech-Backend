@@ -18,7 +18,7 @@ const config: Config = {
   port: Number(process.env.PORT) || 3000,
   jwtSecret: process.env.JWT_SECRET || "Curvvtech",
   jwtRefreshSecret: process.env.JWT_REFRESH_SECRET || "CurvvtechRef",
-  dbConnectionString: process.env.MONGODB_URL || "mongodb://localhost:27017",
+  dbConnectionString: process.env.MONGO_URI!,
   redisUsername: process.env.REDIS_DB_USERNAME!,
   redisPassword: process.env.REDIS_DB_PASSWORD!,
   redisHost: process.env.REDIS_DB_HOST!,
