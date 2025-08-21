@@ -13,25 +13,208 @@
 					"name": "usageReport",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/devices/d4/usage/report?range=72h",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"devices",
+								"d4",
+								"usage",
+								"report"
+							],
+							"query": [
+								{
+									"key": "range",
+									"value": "72h"
+								}
+							]
+						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "usageReport",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/devices/d4/usage/report?range=72h",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"devices",
+										"d4",
+										"usage",
+										"report"
+									],
+									"query": [
+										{
+											"key": "range",
+											"value": "72h"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "3"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "2"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Aug 2025 11:54:39 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1755777340"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "77"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4d-+Cd5+T4r4yiqpl/MX0ICHEVZuas\""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"device_id\": \"d4\",\n    \"total_units_last_24h\": 2.5,\n    \"fromCache\": true\n}"
+						},
+						{
+							"name": "usageReport",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/devices/d4/usage/report?range=72h",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"devices",
+										"d4",
+										"usage",
+										"report"
+									],
+									"query": [
+										{
+											"key": "range",
+											"value": "72h"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "3"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "2"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Aug 2025 11:56:03 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1755777424"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "120"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"78-OKfP1nhpY4IXmVxmAeSHqqmR1wc\""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"device_id\": \"d4\",\n    \"range\": \"72h\",\n    \"chart\": {\n        \"labels\": [\n            \"2025-08-21\"\n        ],\n        \"data\": [\n            5\n        ]\n    },\n    \"total\": 5,\n    \"fromCache\": false\n}"
+						}
+					]
 				},
 				{
 					"name": "LogsExportJson",
 					"request": {
 						"method": "GET",
-						"header": []
-					},
-					"response": []
-				},
-				{
-					"name": "LogsExportCsv",
-					"request": {
-						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/logs/d2/export/csv?limit=10&startDate=2025-08-19&endDate=2025-08-20",
+							"raw": "http://localhost:3000/api/v1/logs/d4/export/json?limit=600&startDate=2025-08-21&endDate=2025-08-21",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -41,27 +224,251 @@
 								"api",
 								"v1",
 								"logs",
-								"d2",
+								"d4",
+								"export",
+								"json"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "600"
+								},
+								{
+									"key": "startDate",
+									"value": "2025-08-21"
+								},
+								{
+									"key": "endDate",
+									"value": "2025-08-21"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "LogsExportJson",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/logs/d4/export/json?limit=600&startDate=2025-08-21&endDate=2025-08-21",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"logs",
+										"d4",
+										"export",
+										"json"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "600"
+										},
+										{
+											"key": "startDate",
+											"value": "2025-08-21"
+										},
+										{
+											"key": "endDate",
+											"value": "2025-08-21"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "5"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "4"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Aug 2025 11:56:31 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1755777452"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "78"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4e-Jm+VRKZRL/pF+8CyAU82gyknj6I\""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Export job started\",\n    \"jobId\": \"job_1755777391877_24\"\n}"
+						}
+					]
+				},
+				{
+					"name": "LogsExportCsv",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/logs/d4/export/csv?limit=600&startDate=2025-08-21&endDate=2025-08-21",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"logs",
+								"d4",
 								"export",
 								"csv"
 							],
 							"query": [
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "600"
 								},
 								{
 									"key": "startDate",
-									"value": "2025-08-19"
+									"value": "2025-08-21"
 								},
 								{
 									"key": "endDate",
-									"value": "2025-08-20"
+									"value": "2025-08-21"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "LogsExportCsv",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/logs/d4/export/csv?limit=600&startDate=2025-08-21&endDate=2025-08-21",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"logs",
+										"d4",
+										"export",
+										"csv"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "600"
+										},
+										{
+											"key": "startDate",
+											"value": "2025-08-21"
+										},
+										{
+											"key": "endDate",
+											"value": "2025-08-21"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "5"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "2"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Aug 2025 11:57:20 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1755777452"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "79"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4f-GlchBVs8Yd6q3HKxiON3DSOh+ro\""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Export job started\",\n    \"jobId\": \"job_1755777440228_426\"\n}"
+						}
+					]
 				},
 				{
 					"name": "ExportLogs",
@@ -69,7 +476,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/logs/export/status/job_1755764931372_830",
+							"raw": "http://localhost:3000/api/v1/logs/export/status/job_1755777440228_426",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -81,11 +488,176 @@
 								"logs",
 								"export",
 								"status",
-								"job_1755764931372_830"
+								"job_1755777440228_426"
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "ExportLogsJSON",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/logs/export/status/job_1755777391877_24",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"logs",
+										"export",
+										"status",
+										"job_1755777391877_24"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "5"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "3"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Aug 2025 11:56:53 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1755777452"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Disposition",
+									"value": "attachment; filename=\"device_d4_logs.json\""
+								},
+								{
+									"key": "Content-Length",
+									"value": "240"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"f0-0h/STGJVs+jMqd6EopBCkO+6B9M\""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"l18\",\n        \"event\": \"units_consumed\",\n        \"value\": 2.5,\n        \"timestamp\": \"2025-08-21T11:50:51.804Z\"\n    },\n    {\n        \"id\": \"l19\",\n        \"event\": \"units_consumed\",\n        \"value\": 2.5,\n        \"timestamp\": \"2025-08-21T11:55:57.019Z\"\n    }\n]"
+						},
+						{
+							"name": "ExportLogsCSV",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/logs/export/status/job_1755777440228_426",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"logs",
+										"export",
+										"status",
+										"job_1755777440228_426"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "5"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "4"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Aug 2025 11:57:49 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1755777530"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/csv; charset=utf-8"
+								},
+								{
+									"key": "Content-Disposition",
+									"value": "attachment; filename=\"device_d4_logs.csv\""
+								},
+								{
+									"key": "Content-Length",
+									"value": "142"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"8e-gQKeFcyZs46IBs8NiEAk96vFHlM\""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "\"id\",\"event\",\"value\",\"timestamp\"\r\n\"l18\",\"units_consumed\",2.5,\"2025-08-21T11:50:51.804Z\"\r\n\"l19\",\"units_consumed\",2.5,\"2025-08-21T11:55:57.019Z\""
+						}
+					]
 				}
 			]
 		},
@@ -102,7 +674,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"shashank\",\r\n    \"email\":\"shashank17@gmail.com\",\r\n    \"password\":\"shashank123\",\r\n    \"role\":\"user\"\r\n}",
+							"raw": "{\r\n    \"name\":\"shashank\",\r\n    \"email\":\"shashank@gmail.com\",  //should be unique\r\n    \"password\":\"shashank123\",\r\n    \"role\":\"user\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -124,7 +696,93 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "http://localhost:3000/api/v1/auth/signUp",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"shashank\",\r\n    \"email\":\"shashank@gmail.com\",  //should be unique\r\n    \"password\":\"shashank123\",\r\n    \"role\":\"user\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/auth/signUp",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"signUp"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "5"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "3"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Aug 2025 11:48:43 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1755776957"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "57"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"39-L4ChN3EFRYuIiTpWUtpbvMTfrpg\""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"User registered successfully\"\n}"
+						}
+					]
 				},
 				{
 					"name": "http://localhost:3000/api/v1/auth/login",
@@ -136,7 +794,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"shashank17@gmail.com\",\r\n    \"password\":\"shashank123\"\r\n}",
+							"raw": "{\r\n    \"email\":\"shashank@gmail.com\",\r\n    \"password\":\"shashank123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -158,7 +816,101 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "http://localhost:3000/api/v1/auth/login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"shashank@gmail.com\",\r\n    \"password\":\"shashank123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "5"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "2"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Aug 2025 11:49:00 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1755776957"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNoYXNoYW5rQGdtYWlsLmNvbSIsImlkIjoidTYiLCJhY2NvdW50VHlwZSI6InVzZXIiLCJvcmdJZCI6IkN1cnZ2dGVjaCIsImlhdCI6MTc1NTc3Njk0MCwiZXhwIjoxNzU1Nzc3ODQwfQ.A-MgWYX2cdoUPXEc0o7b0mlWSTlgRrbhFM8R5x0vXT4; Max-Age=604800; Path=/; Expires=Thu, 28 Aug 2025 11:49:00 GMT; HttpOnly; SameSite=Strict"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNoYXNoYW5rQGdtYWlsLmNvbSIsImlkIjoidTYiLCJhY2NvdW50VHlwZSI6InVzZXIiLCJvcmdJZCI6IkN1cnZ2dGVjaCIsImlhdCI6MTc1NTc3Njk0MCwiZXhwIjoxNzU2MzgxNzQwfQ.TzGvjfuNp3Q9ig0QthoTRTfO8dwxP03hGeVC3UTKOKw; Max-Age=604800; Path=/; Expires=Thu, 28 Aug 2025 11:49:00 GMT; HttpOnly; SameSite=Strict"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "348"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"15c-MsMYFRayAzGoqvThJ/9ef3rruSc\""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNoYXNoYW5rQGdtYWlsLmNvbSIsImlkIjoidTYiLCJhY2NvdW50VHlwZSI6InVzZXIiLCJvcmdJZCI6IkN1cnZ2dGVjaCIsImlhdCI6MTc1NTc3Njk0MCwiZXhwIjoxNzU1Nzc3ODQwfQ.A-MgWYX2cdoUPXEc0o7b0mlWSTlgRrbhFM8R5x0vXT4\",\n    \"user\": {\n        \"id\": \"u6\",\n        \"name\": \"shashank\",\n        \"email\": \"shashank@gmail.com\",\n        \"role\": \"user\"\n    }\n}"
+						}
+					]
 				}
 			]
 		},
@@ -175,7 +927,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Living Room Light\",\r\n  \"type\": \"light\",\r\n  \"status\": \"active\"\r\n}",
+							"raw": "{\r\n  \"name\": \"Living light\",\r\n  \"type\": \"light\",\r\n  \"status\": \"active\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -196,7 +948,92 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "http://localhost:3000/api/v1/devices",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Living light\",\r\n  \"type\": \"light\",\r\n  \"status\": \"active\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/devices",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"devices"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "100"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "99"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Aug 2025 11:49:22 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1755777023"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "129"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"81-jusVkZatq4acqu8NTF9vo7u+J/M\""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"device\": {\n        \"id\": \"d4\",\n        \"name\": \"Living light\",\n        \"type\": \"light\",\n        \"status\": \"active\",\n        \"last_active_at\": null,\n        \"owner_id\": \"u6\"\n    }\n}"
+						}
+					]
 				},
 				{
 					"name": "http://localhost:3000/api/v1/devices",
@@ -211,7 +1048,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"type\":\"light\",\r\n    \"status\": \"deactive\"\r\n}",
+							"raw": "{\r\n    \"type\":\"light\",\r\n    \"status\": \"active\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -232,7 +1069,92 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "http://localhost:3000/api/v1/devices",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"type\":\"light\",\r\n    \"status\": \"active\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/devices",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"devices"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "100"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "97"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Aug 2025 11:49:50 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1755777023"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "316"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"13c-bDsAXUjB0QKlYLiIchpnlFl4o1w\""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"devices\": [\n        {\n            \"id\": \"68a703e9159232c12bd101da\",\n            \"name\": \"Living\",\n            \"type\": \"light\",\n            \"status\": \"active\",\n            \"last_active_at\": \"2025-08-21T11:35:57.338Z\",\n            \"owner_id\": \"u5\"\n        },\n        {\n            \"id\": \"68a707c2ecbf79a499035f52\",\n            \"name\": \"Living light\",\n            \"type\": \"light\",\n            \"status\": \"active\",\n            \"last_active_at\": null,\n            \"owner_id\": \"u6\"\n        }\n    ],\n    \"fromCache\": false\n}"
+						}
+					]
 				},
 				{
 					"name": "http://localhost:3000/api/v1/devices/d1",
@@ -244,7 +1166,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"status\":\"deactive\"\r\n}",
+							"raw": "{\r\n    \"status\":\"active\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -252,7 +1174,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/devices/d1",
+							"raw": "http://localhost:3000/api/v1/devices/d4",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -262,11 +1184,182 @@
 								"api",
 								"v1",
 								"devices",
-								"d1"
+								"d4"
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "http://localhost:3000/api/v1/devices/d1",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\":\"deactive\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/devices/d4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"devices",
+										"d4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "100"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "96"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Aug 2025 11:50:09 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1755777023"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "176"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b0-G5a6IiTGSot+4pT3OOJy2H8PGL4\""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"device\": {\n        \"id\": \"68a707c2ecbf79a499035f52\",\n        \"name\": \"Living light\",\n        \"type\": \"light\",\n        \"status\": \"deactive\",\n        \"last_active_at\": \"2025-08-21T11:50:09.718Z\",\n        \"owner_id\": \"u6\"\n    }\n}"
+						},
+						{
+							"name": "http://localhost:3000/api/v1/devices/d1",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\":\"active\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/devices/d4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"devices",
+										"d4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "100"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "99"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Aug 2025 11:51:57 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1755777178"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "174"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ae-nkRd6Va7v1XXSuM4NQHL00Wb42M\""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"device\": {\n        \"id\": \"68a707c2ecbf79a499035f52\",\n        \"name\": \"Living light\",\n        \"type\": \"light\",\n        \"status\": \"active\",\n        \"last_active_at\": \"2025-08-21T11:51:57.828Z\",\n        \"owner_id\": \"u6\"\n    }\n}"
+						}
+					]
 				},
 				{
 					"name": "http://localhost:3000/api/v1/devices/d1",
@@ -277,7 +1370,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/devices/d1",
+							"raw": "http://localhost:3000/api/v1/devices/d3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -287,11 +1380,88 @@
 								"api",
 								"v1",
 								"devices",
-								"d1"
+								"d3"
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "http://localhost:3000/api/v1/devices/d1",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/devices/d3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"devices",
+										"d3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "100"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "95"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Aug 2025 11:50:22 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1755777023"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "56"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"38-yok3rEgpZG/0vq1mDYNPw/kfZr8\""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Device deleted successfully\"\n}"
+						}
+					]
 				},
 				{
 					"name": "http://localhost:3000/api/v1/devices/d1/heartbeat",
@@ -301,8 +1471,17 @@
 						},
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"status\": \"active\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/devices/d1/heartbeat",
+							"raw": "http://localhost:3000/api/v1/devices/d4/heartbeat",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -312,12 +1491,99 @@
 								"api",
 								"v1",
 								"devices",
-								"d1",
+								"d4",
 								"heartbeat"
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "http://localhost:3000/api/v1/devices/d1/heartbeat",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"status\": \"active\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/devices/d4/heartbeat",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"devices",
+										"d4",
+										"heartbeat"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "100"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "99"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Aug 2025 11:50:35 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1755777096"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "98"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"62-QyBi/xgpsIJtVqiYazS9tpZonzs\""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Device heartbeat recorded\",\n    \"last_active_at\": \"2025-08-21T11:50:35.234Z\"\n}"
+						}
+					]
 				}
 			]
 		},
@@ -342,7 +1608,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/devices/d1/logs",
+							"raw": "http://localhost:3000/api/v1/devices/d4/logs",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -352,12 +1618,99 @@
 								"api",
 								"v1",
 								"devices",
-								"d1",
+								"d4",
 								"logs"
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "http://localhost:3000/api/v1/devices/d1/logs",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"event\": \"units_consumed\",\r\n  \"value\": 2.5\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/devices/d4/logs",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"devices",
+										"d4",
+										"logs"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "1000"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "999"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Aug 2025 11:50:51 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1755777112"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "149"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"95-0vw9Ro07CmLVVKDL6/6TyFNiVFQ\""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Log Created Successfully\",\n    \"logs\": {\n        \"id\": \"l18\",\n        \"event\": \"units_consumed\",\n        \"value\": 2.5,\n        \"timestamp\": \"2025-08-21T11:50:51.804Z\"\n    }\n}"
+						}
+					]
 				},
 				{
 					"name": "http://localhost:3000/api/v1/devices/d1/logs?limit=10",
@@ -368,7 +1721,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/devices/d1/logs?limit=10",
+							"raw": "http://localhost:3000/api/v1/devices/d4/logs?limit=10",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -378,7 +1731,7 @@
 								"api",
 								"v1",
 								"devices",
-								"d1",
+								"d4",
 								"logs"
 							],
 							"query": [
@@ -389,18 +1742,114 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "http://localhost:3000/api/v1/devices/d1/logs?limit=10",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/devices/d4/logs?limit=10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"devices",
+										"d4",
+										"logs"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "1000"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "998"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Aug 2025 11:51:08 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1755777112"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "132"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"84-INIqRHvDSUOMdv48+6qrSm9idKg\""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"logs\": [\n        {\n            \"id\": \"l18\",\n            \"event\": \"units_consumed\",\n            \"value\": 2.5,\n            \"timestamp\": \"2025-08-21T11:50:51.804Z\"\n        }\n    ],\n    \"fromCache\": false\n}"
+						}
+					]
 				},
 				{
 					"name": "http://localhost:3000/api/v1/devices/d1/usage?range=24h",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "noauth"
 						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/devices/d1/usage?range=24h",
+							"raw": "http://localhost:3000/api/v1/devices/d4/usage?range=72h",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -410,18 +1859,111 @@
 								"api",
 								"v1",
 								"devices",
-								"d1",
+								"d4",
 								"usage"
 							],
 							"query": [
 								{
 									"key": "range",
-									"value": "24h"
+									"value": "72h"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "http://localhost:3000/api/v1/devices/d1/usage?range=24h",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/devices/d4/usage?range=72h",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"devices",
+										"d4",
+										"usage"
+									],
+									"query": [
+										{
+											"key": "range",
+											"value": "72h"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "1000"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "997"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Aug 2025 11:51:29 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1755777112"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "78"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4e-pR4Hs3bVeupQjqNv7j+1aK5T6Fs\""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"device_id\": \"d4\",\n    \"total_units_last_24h\": 2.5,\n    \"fromCache\": false\n}"
+						}
+					]
 				}
 			]
 		},
@@ -432,9 +1974,94 @@
 					"name": "SSE",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/events",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"events"
+							]
+						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "SSE",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/events",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"events"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "10"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "9"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Aug 2025 11:51:47 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1755777168"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/event-stream"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "data: {\"message\":\"Device Updated\",\"id\":\"68a707c2ecbf79a499035f52\",\"name\":\"Living light\",\"type\":\"light\",\"status\":\"active\",\"last_active_at\":\"2025-08-21T11:51:57.828Z\",\"owner_id\":\"u6\"}\n\n"
+						}
+					]
 				}
 			]
 		},
@@ -444,10 +2071,99 @@
 				{
 					"name": "healthCheck",
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/health-check",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"health-check"
+							]
+						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "healthCheck",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/health-check",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"health-check"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "5"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "4"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Aug 2025 11:54:13 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1755777314"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "110"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"6e-kqZB1BkNC9qapUxbRu9d9rT12OM\""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"ok\",\n    \"dependencies\": {\n        \"database\": \"DB Connected Successfully\",\n        \"redis\": \"Redis Connected Successfully\"\n    }\n}"
+						}
+					]
 				}
 			]
 		}
