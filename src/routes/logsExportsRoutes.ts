@@ -2,7 +2,8 @@ import express from "express";
 import {
   getLogsJsonExport,
   getLogsCsvExport,
-} from "../services/csv&jsonLogsExportService";
+  getExportStatus,
+} from "../controllers/logsExportControllers";
 import authMiddleware from "../middleware/authMiddleware";
 import { logsExportLimiter } from "../utils/rateLimiter";
 
@@ -20,6 +21,13 @@ router.get(
   authMiddleware,
   logsExportLimiter,
   getLogsCsvExport
+);
+
+router.get(
+  "/logs/:id/export/status/:jobId",
+  authMiddleware,
+  logsExportLimiter,
+  getExportStatus
 );
 
 export default router;

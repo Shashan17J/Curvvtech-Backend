@@ -4,7 +4,7 @@ import cookieParser from "cookie-parser";
 
 import config from "./configs/config";
 import connect from "./configs/database";
-import "./cronJob/backgroundJob";
+import "./jobs/statusUpdateJob";
 import connectRedis from "./configs/redis";
 import { responseTimeLogger } from "./middleware/responseTimeLogger";
 import { ipLogger } from "./middleware/ipLogMiddleware";
