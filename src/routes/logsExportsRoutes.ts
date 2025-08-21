@@ -24,7 +24,7 @@ router.get(
 );
 
 router.get(
-  "/logs/:id/export/status/:jobId",
+  "/logs/export/status/:jobId",
   authMiddleware,
   logsExportLimiter,
   getExportStatus

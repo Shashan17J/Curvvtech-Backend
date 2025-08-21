@@ -17,7 +17,7 @@ export const deviceLimiter = rateLimit({
 //for device log routes (50req/min)
 export const deviceLogLimiter = rateLimit({
   windowMs: 1 * 60 * 1000,
-  max: 150,
+  max: 1000,
   message: "Too many requests for device operations.",
 });
 

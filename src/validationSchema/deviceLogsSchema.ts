@@ -50,3 +50,7 @@ export const getUsageParamsSchema = z.object({
 export const getUsageQuerySchema = z.object({
   range: z.enum(["24h", "48h", "72h"]).default("24h"),
 });
+
+export const getExportQuerySchema = z.object({
+  jobId: z.string().min(1, { message: "jobId is required" }),
+});

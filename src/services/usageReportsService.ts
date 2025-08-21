@@ -46,12 +46,12 @@ export const getUsageReport = async (req: Request, res: Response) => {
         .json({ success: false, message: "Device not found" });
     }
 
-    // ✅ Time range
+    // Time range
     const hours = parseInt(range.replace("h", ""), 10);
     const fromTime = new Date();
     fromTime.setHours(fromTime.getHours() - hours);
 
-    // ✅ Choose grouping interval
+    // Choosing group interval
     let groupFormat = "%Y-%m-%dT%H:00:00Z"; // hourly default
     if (hours > 24 && hours <= 48) {
       groupFormat = "%Y-%m-%dT%H:00:00Z"; // still hourly
@@ -60,7 +60,7 @@ export const getUsageReport = async (req: Request, res: Response) => {
       groupFormat = "%Y-%m-%d"; // daily
     }
 
-    // ✅ Aggregate usage per interval
+    // Aggregate usage per interval
     const logs = await DeviceLog.aggregate([
       {
         $match: {
@@ -80,7 +80,7 @@ export const getUsageReport = async (req: Request, res: Response) => {
       { $sort: { _id: 1 } },
     ]);
 
-    // ✅ Convert aggregation to chart format
+    // Convert aggregation to chart format
     const labels = logs.map((l) => l._id);
     const data = logs.map((l) => l.totalUnits);
     const total = data.reduce((a, b) => a + b, 0);
@@ -92,7 +92,7 @@ export const getUsageReport = async (req: Request, res: Response) => {
       total,
     };
 
-    // ✅ Cache for 5 minutes
+    // Cache for 5 minutes
     await redis.set(cacheKey, JSON.stringify(result), { EX: 300 });
 
     res.status(200).json({

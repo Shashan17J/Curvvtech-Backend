@@ -31,6 +31,9 @@ const deviceLogSchema = new mongoose.Schema<IDeviceLog>(
   { timestamps: true }
 );
 
+// indexing
+deviceLogSchema.index({ deviceId: 1 });
+
 deviceLogSchema.plugin(AutoIncrement as any, {
   inc_field: "logNumber",
   start_seq: 1,

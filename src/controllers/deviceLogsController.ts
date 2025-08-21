@@ -116,9 +116,7 @@ export const getLogs = async (req: Request, res: Response) => {
         .json({ success: false, message: "Device not found" });
     }
 
-    const logs = await DeviceLog.find({ deviceId: device.deviceId }).limit(
-      limit
-    );
+    const logs = await DeviceLog.find({ deviceId: id }).limit(limit);
 
     const formatted = logs.map((log) => ({
       id: log.logId,

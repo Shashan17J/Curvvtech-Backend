@@ -4,13 +4,7 @@ import config from "../configs/config";
 import User from "../models/user";
 import { generateAccessToken, generateRefreshToken } from "../utils/jwt";
 
-// If access token valid → request succeeds.
-// If refresh expired → 403 → must login again.
-//Added blacklist check before using refresh token.
-//On refresh, we blacklist old refresh token.
-//Issued both new access + new refresh tokens.
-//Stored the new refresh token in DB.
-// both cookie have same alive but diff jwt expiration time.
+
 
 export interface AuthRequest extends Request {
   user?: any;
