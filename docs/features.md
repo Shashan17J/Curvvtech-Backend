@@ -61,3 +61,9 @@
 
 14. **DB Indexing**
     - Mostly used is deviced
+
+15. **Query performance monitoring**
+
+16. **database connection pooling**
+
+17. **Request and Response Monitoring loging**

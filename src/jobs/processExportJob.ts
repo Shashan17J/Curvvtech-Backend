@@ -57,6 +57,7 @@ export const processExportJob = async (
 
     await redis.expire(`exportJob:${jobId}`, 1200);
 
+    // sending email (it will log the email but will not send it cause i am not using SMTP server, just using dummy server)
     const info = await mailSender(
       "shashank.jangid17@gmail.com",
       `Export job ${jobId} for device ${id} is ready`,

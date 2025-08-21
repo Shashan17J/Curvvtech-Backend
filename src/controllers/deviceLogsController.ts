@@ -13,7 +13,6 @@ import connectRedis from "../configs/redis";
 
 export const createLog = async (req: Request, res: Response) => {
   try {
-    // const redis = await connectRedis();
     const parsedParams = createLogsParamsSchema.safeParse(req.params);
     if (!parsedParams.success) {
       return res.status(403).json({
@@ -47,20 +46,6 @@ export const createLog = async (req: Request, res: Response) => {
     });
 
     await newLog.save();
-
-    // await redis.lPush(
-    //   `logs:${device.deviceId}`,
-    //   JSON.stringify({
-    //     id: newLog.logId,
-    //     event: newLog.event,
-    //     value: newLog.value,
-    //     timestamp: newLog.timestamp,
-    //   })
-    // );
-
-    // await redis.lTrim(`logs:${device.deviceId}`, 0, 99);
-
-    // await redis.expire(`logs:${device.deviceId}`, 300); //5 min
 
     res.status(201).json({
       success: true,

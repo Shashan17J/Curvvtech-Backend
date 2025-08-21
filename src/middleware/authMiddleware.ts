@@ -4,8 +4,6 @@ import config from "../configs/config";
 import User from "../models/user";
 import { generateAccessToken, generateRefreshToken } from "../utils/jwt";
 
-
-
 export interface AuthRequest extends Request {
   user?: any;
 }
@@ -35,7 +33,7 @@ const authMiddleware = async (
           .json({ success: false, message: "Invalid access token" });
       }
 
-      // If accessToken expired → check refreshToken
+      // If accessToken expired check refreshToken
       const refreshToken = req.cookies.refreshToken;
       if (!refreshToken) {
         return res
@@ -70,7 +68,7 @@ const authMiddleware = async (
             .json({ success: false, message: "Refresh token invalid" });
         }
 
-        // Token Rotation:
+        // Token Rotation
         // 1. blacklisting old refresh tokens
         await User.updateOne(
           { userId: user.userId },

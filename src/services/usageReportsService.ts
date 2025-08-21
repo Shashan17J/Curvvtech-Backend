@@ -80,7 +80,7 @@ export const getUsageReport = async (req: Request, res: Response) => {
       { $sort: { _id: 1 } },
     ]);
 
-    // Convert aggregation to chart format
+    // Converting aggregation to chart format
     const labels = logs.map((l) => l._id);
     const data = logs.map((l) => l.totalUnits);
     const total = data.reduce((a, b) => a + b, 0);
@@ -92,7 +92,7 @@ export const getUsageReport = async (req: Request, res: Response) => {
       total,
     };
 
-    // Cache for 5 minutes
+    // Caching it for 5 minutes
     await redis.set(cacheKey, JSON.stringify(result), { EX: 300 });
 
     res.status(200).json({

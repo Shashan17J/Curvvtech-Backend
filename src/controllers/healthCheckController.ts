@@ -34,10 +34,10 @@ export const healthCheck = async (
     };
 
     res.status(status.status === "ok" ? 200 : 500).json(status);
-  } catch (error: unknown) {
+  } catch (error: any) {
     res.status(500).json({
       status: "error",
-      message: error instanceof Error ? error.message : "Unknown error",
+      message: error.message,
     });
   }
 };

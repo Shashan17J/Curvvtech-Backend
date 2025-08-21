@@ -80,7 +80,7 @@ export const handleLogsExport = async (
       return res.send(output);
     }
 
-    //For large exports → create async job
+    //For large exports create async job
     const jobId = `job_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
     await redis.hSet(`exportJob:${jobId}`, {
       status: "pending",

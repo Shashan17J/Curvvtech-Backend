@@ -8,25 +8,15 @@
    - Both tokens are set in **HTTP-only cookies**.
 
 2. **Accessing Protected Routes**
-   - Client sends request with `Access Token`.
-   - If token is valid → request succeeds.
-   - If expired → client calls `/refresh`.
-
-3. **Token Refresh**
-   - Client sends `Refresh Token` to `/refresh`.
-   - Server checks:
-     - Is token expired? → Return `403` → Login required.
-     - Is token blacklisted? → Return `403`.
-   - If valid:
-     - Old Refresh Token is **blacklisted**.
-     - Store blacklisted token inside db.
+   - Client sends request to `protected routes` with `Access Token`.
+   - Auth Middleware will intercept the client request and checks jwt token is valid → request succeeds.
+     .
+   - if not valid then:
+     - Auth Middleware will generate new `Access Token` and `Referesh Token`.
+     - Old Refresh Token is **blacklisted** and store blacklisted token inside db.
      - New `Access Token` + `Refresh Token` are issued.
-     - Store new Refresh Token in DB.
-     - Send tokens as cookies.
-
-4. **Logout**
-   - On logout, current Refresh Token is blacklisted.
-   - Tokens removed from cookies.
+     - Store new Refresh Token in DB as refreshToken.
+     - Send New `Access Token` + `Refresh Token` as cookies.
 
 ---
 

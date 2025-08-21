@@ -28,6 +28,7 @@ connect();
 // redis connect
 connectRedis();
 
+//Query Logging
 enableQueryLogging();
 
 app.use(express.json());
@@ -42,6 +43,7 @@ app.use(
 // Ip Logging
 app.use(ipLogger);
 
+// response time logger
 app.use(responseTimeLogger);
 
 app.use("/api/v1/auth", userRoute);

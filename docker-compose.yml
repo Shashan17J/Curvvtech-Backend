@@ -8,7 +8,9 @@ services:
       - "3000:3000"
     environment:
       - JWT_SECRET=Curvvtech
+      - JWT_REFRESH_SECRET=CurvvtechRef
       - MONGO_URI=mongodb://mongo:27017/curvvtech
+      - REDIS_DB_USERNAME=default
       - REDIS_DB_HOST=localhost
       - REDIS_DB_PORT=6379
     depends_on:
