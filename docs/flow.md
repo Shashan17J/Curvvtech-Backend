@@ -32,4 +32,4 @@
 
 ## Flow Diagram
 
-![Auth Flow](./assets/auth-flow.png)
+![Auth Flow](assets/auth-flow.png)
